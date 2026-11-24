@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' file:; script-src 'self' file: https://aladin.cds.unistra.fr 'wasm-unsafe-eval'; worker-src 'self' blob:; connect-src 'self' blob: data: https:; img-src 'self' file: data: blob: https:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>GRAWITA DRY RUN · MS261006h · Aladin Lite</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="img/grawita-favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="img/grawita-favicon-16.png">
+  <link rel="stylesheet" href="style/app.css">
+</head>
+<body>
+  <div class="app-shell">
+    <nav class="grawita-nav" aria-label="GRAWITA dry-run navigation">
+      <a class="grawita-identity" href="#sky-pane" title="Back to sky viewer">
+        <img src="img/grawita-fallback.svg" alt="GRAWITA logo" width="52" height="52">
+        <span><strong>GRAWITA <em>DRY RUN</em></strong></span>
+      </a>
+      <div class="grawita-nav-links">
+        <a href="#sky-pane">Sky Localization</a><a href="#coverage-pane">Coverage</a><a href="#layer-pane">MOC</a><a href="#glade-panel">Galaxies</a><a href="#tr-detail">Distance</a><a href="#transient-inspector">Transients</a>
+      </div>
+      <div class="grawita-event"><span>SELECTED EVENT <b>MS261006h</b> · <a class="grawita-mdc-link" href="https://gracedb.ligo.org/search/" target="_blank" rel="noopener noreferrer" aria-label="MDC simulation: open the GraceDB search in a new tab" title="Open the GraceDB search (gracedb.ligo.org) in a new tab">MDC simulation</a></span><a href="data/bayestar.multiorder.fits,1" download="bayestar.multiorder.fits,1" target="_blank" rel="noopener noreferrer" title="Download the bundled MS261006h BAYESTAR sky map (GraceDB event M647628)">BAYESTAR FITS ↓</a></div>
+    </nav>
+    <header class="masthead">
+      
+      <div class="mast-row">
+        <div><h1>GW Follow-up <span>· Interactive planning lab</span></h1>
+          
+        </div>
+        
+      </div>
+    </header>
+    <nav class="mobile-jumps" aria-label="Panel navigation">
+      <a href="#sky-pane">Sky Localization</a><a href="#coverage-pane">Coverage</a><a href="#layer-pane">MOC</a><a href="#glade-panel">Galaxies</a><a href="#tr-detail">Distance</a><a href="#transient-inspector">Transients</a>
+    </nav>
+    <div class="layout">
+      <aside class="sidebar" id="layer-pane" aria-label="Coverage and catalogs sidebar">
+        <div class="panel-head"><span class="tiny-heading">01 / SKY COVERAGE MOCs</span><span id="activeCount" class="count">10 selected</span></div>
+        <section class="group">
+          <div class="group-title">Gravitational-wave MOCs <span class="group-desc">BAYESTAR credible regions · MS261006h</span></div>
+          <label class="layer" for="toggle-gw90"><input id="toggle-gw90" type="checkbox" checked><span class="swatch amber"></span><span class="layer-copy"><b>GW · 90%</b><small id="gw90hint">—</small></span></label>
+          <div class="moc-appearance" data-moc-appearance="gw90" role="group" aria-label="gw90 MOC appearance">
+            <label class="moc-appearance-color" for="moc-color-gw90"><span>Color</span><input type="color" id="moc-color-gw90" aria-label="gw90 MOC color"></label>
+            <label class="moc-appearance-opacity" for="moc-opacity-gw90"><span>Opacity</span><input type="range" id="moc-opacity-gw90" min="0" max="100" step="1" aria-label="gw90 MOC opacity"><output id="moc-opacity-value-gw90" for="moc-opacity-gw90">—</output></label>
+          </div>
+          <label class="layer" for="toggle-gw50"><input id="toggle-gw50" type="checkbox" checked><span class="swatch coral"></span><span class="layer-copy"><b>GW · 50%</b><small id="gw50hint">—</small></span></label>
+          <div class="moc-appearance" data-moc-appearance="gw50" role="group" aria-label="gw50 MOC appearance">
+            <label class="moc-appearance-color" for="moc-color-gw50"><span>Color</span><input type="color" id="moc-color-gw50" aria-label="gw50 MOC color"></label>
+            <label class="moc-appearance-opacity" for="moc-opacity-gw50"><span>Opacity</span><input type="range" id="moc-opacity-gw50" min="0" max="100" step="1" aria-label="gw50 MOC opacity"><output id="moc-opacity-value-gw50" for="moc-opacity-gw50">—</output></label>
+          </div>
+          <label class="layer" for="toggle-gw10"><input id="toggle-gw10" type="checkbox" checked><span class="swatch pink"></span><span class="layer-copy"><b>GW · 10%</b><small id="gw10hint">—</small></span></label>
+          <div class="moc-appearance" data-moc-appearance="gw10" role="group" aria-label="gw10 MOC appearance">
+            <label class="moc-appearance-color" for="moc-color-gw10"><span>Color</span><input type="color" id="moc-color-gw10" aria-label="gw10 MOC color"></label>
+            <label class="moc-appearance-opacity" for="moc-opacity-gw10"><span>Opacity</span><input type="range" id="moc-opacity-gw10" min="0" max="100" step="1" aria-label="gw10 MOC opacity"><output id="moc-opacity-value-gw10" for="moc-opacity-gw10">—</output></label>
+          </div>
+        </section>
+        <section class="group">
+          <div class="group-title">KiDS <span class="group-desc">The Kilo-Degree Survey</span></div>
+          <label class="layer" for="toggle-kidsN"><input id="toggle-kidsN" type="checkbox" checked><span class="swatch teal"></span><span class="layer-copy"><b>KiDS-N</b><small id="kidsNhint">User-supplied MOC · KiDS-N.fits</small></span></label>
+          <div class="moc-appearance" data-moc-appearance="kidsN" role="group" aria-label="kidsN MOC appearance">
+            <label class="moc-appearance-color" for="moc-color-kidsN"><span>Color</span><input type="color" id="moc-color-kidsN" aria-label="kidsN MOC color"></label>
+            <label class="moc-appearance-opacity" for="moc-opacity-kidsN"><span>Opacity</span><input type="range" id="moc-opacity-kidsN" min="0" max="100" step="1" aria-label="kidsN MOC opacity"><output id="moc-opacity-value-kidsN" for="moc-opacity-kidsN">—</output></label>
+          </div>
+          <label class="layer" for="toggle-kidsS"><input id="toggle-kidsS" type="checkbox" checked><span class="swatch teal"></span><span class="layer-copy"><b>KiDS-S</b><small id="kidsShint">User-supplied MOC · KiDS-S.fits</small></span></label>
+          <div class="moc-appearance" data-moc-appearance="kidsS" role="group" aria-label="kidsS MOC appearance">
+            <label class="moc-appearance-color" for="moc-color-kidsS"><span>Color</span><input type="color" id="moc-color-kidsS" aria-label="kidsS MOC color"></label>
+            <label class="moc-appearance-opacity" for="moc-opacity-kidsS"><span>Opacity</span><input type="range" id="moc-opacity-kidsS" min="0" max="100" step="1" aria-label="kidsS MOC opacity"><output id="moc-opacity-value-kidsS" for="moc-opacity-kidsS">—</output></label>
+          </div>
+          <label class="layer" for="toggle-kidsW2"><input id="toggle-kidsW2" type="checkbox" checked><span class="swatch teal"></span><span class="layer-copy"><b>KiDS-W2</b><small id="kidsW2hint">User-supplied MOC · KiDS-W2.fits</small></span></label>
+          <div class="moc-appearance" data-moc-appearance="kidsW2" role="group" aria-label="kidsW2 MOC appearance">
+            <label class="moc-appearance-color" for="moc-color-kidsW2"><span>Color</span><input type="color" id="moc-color-kidsW2" aria-label="kidsW2 MOC color"></label>
+            <label class="moc-appearance-opacity" for="moc-opacity-kidsW2"><span>Opacity</span><input type="range" id="moc-opacity-kidsW2" min="0" max="100" step="1" aria-label="kidsW2 MOC opacity"><output id="moc-opacity-value-kidsW2" for="moc-opacity-kidsW2">—</output></label>
+          </div>
+          
+        </section>
+        <section class="group">
+          <div class="group-title">VST ATLAS <span class="group-desc">The VST ATLAS Survey</span></div>
+          <label class="layer" for="toggle-atlasN"><input id="toggle-atlasN" type="checkbox" checked><span class="swatch blue"></span><span class="layer-copy"><b>ATLAS-N</b><small id="atlasNhint">Approx. MPE footprint · 2,189 deg²</small></span></label>
+          <div class="moc-appearance" data-moc-appearance="atlasN" role="group" aria-label="atlasN MOC appearance">
+            <label class="moc-appearance-color" for="moc-color-atlasN"><span>Color</span><input type="color" id="moc-color-atlasN" aria-label="atlasN MOC color"></label>
+            <label class="moc-appearance-opacity" for="moc-opacity-atlasN"><span>Opacity</span><input type="range" id="moc-opacity-atlasN" min="0" max="100" step="1" aria-label="atlasN MOC opacity"><output id="moc-opacity-value-atlasN" for="moc-opacity-atlasN">—</output></label>
+          </div>
+          <label class="layer" for="toggle-atlasS"><input id="toggle-atlasS" type="checkbox" checked><span class="swatch lilac"></span><span class="layer-copy"><b>ATLAS-S</b><small id="atlasShint">Approx. MPE footprint · 2,614 deg²</small></span></label>
+          <div class="moc-appearance" data-moc-appearance="atlasS" role="group" aria-label="atlasS MOC appearance">
+            <label class="moc-appearance-color" for="moc-color-atlasS"><span>Color</span><input type="color" id="moc-color-atlasS" aria-label="atlasS MOC color"></label>
+            <label class="moc-appearance-opacity" for="moc-opacity-atlasS"><span>Opacity</span><input type="range" id="moc-opacity-atlasS" min="0" max="100" step="1" aria-label="atlasS MOC opacity"><output id="moc-opacity-value-atlasS" for="moc-opacity-atlasS">—</output></label>
+          </div>
+        </section>
+        <section class="group">
+          <div class="group-title">Gamma-ray localization MOCs <span class="group-desc">Bundled FITS · local offline data</span></div>
+          <label class="layer" for="toggle-ipn"><input id="toggle-ipn" type="checkbox" checked><span class="swatch blue"></span><span class="layer-copy"><b>IPN — SIMULATED (arbitrary)</b><small id="ipnhint">5° annulus · arbitrary simulation, NOT actual triangulation</small></span></label>
+          <div class="moc-appearance" data-moc-appearance="ipn" role="group" aria-label="ipn MOC appearance">
+            <label class="moc-appearance-color" for="moc-color-ipn"><span>Color</span><input type="color" id="moc-color-ipn" aria-label="ipn MOC color"></label>
+            <label class="moc-appearance-opacity" for="moc-opacity-ipn"><span>Opacity</span><input type="range" id="moc-opacity-ipn" min="0" max="100" step="1" aria-label="ipn MOC opacity"><output id="moc-opacity-value-ipn" for="moc-opacity-ipn">—</output></label>
+          </div>
+          <label class="layer" for="toggle-grb"><input id="toggle-grb" type="checkbox" checked><span class="swatch coral"></span><span class="layer-copy"><b>Simulated Short GRB</b><small id="grbhint">Simulated Events</small></span></label>
+          <div class="moc-appearance" data-moc-appearance="grb" role="group" aria-label="grb MOC appearance">
+            <label class="moc-appearance-color" for="moc-color-grb"><span>Color</span><input type="color" id="moc-color-grb" aria-label="grb MOC color"></label>
+            <label class="moc-appearance-opacity" for="moc-opacity-grb"><span>Opacity</span><input type="range" id="moc-opacity-grb" min="0" max="100" step="1" aria-label="grb MOC opacity"><output id="moc-opacity-value-grb" for="moc-opacity-grb">—</output></label>
+          </div>
+        </section>
+        <section class="group">
+          <div class="group-title">Observatory fields <span class="group-desc">7 fields · 1° × 1°</span></div><details class="small-help"><summary aria-label="Help for observatory fields" title="Show observatory field help">?</summary><p>Toggle fields to show or hide them. Click a field in Aladin or the list to select it. Use <b>Locate</b> to center a field, <b>Only</b> to isolate it, or <b>Add all to Plan</b> for a group.</p></details><div class="observatory-tools"><button type="button" id="observatory-all">Show all 7</button><button type="button" id="observatory-none">Hide all</button><span id="observatory-visible-count" aria-live="polite">0/7 visible</span></div>
+          <div class="observatory-header"><label class="layer" for="field-campo"><input id="field-campo" type="checkbox"><span class="swatch amber"></span><span class="layer-copy"><b>Campo Imperatore</b><small>3 individual 1° × 1° fields · J2000</small></span></label><span id="obs-count-campo" class="obs-count">0/3 visible</span><button id="campo-only" class="obs-plan-all" type="button">Only CI</button><button id="campo-plan" class="obs-plan-all" type="button">Add all to Plan (3)</button></div>
+          <div class="moc-appearance" data-obs-appearance="campo" role="group" aria-label="Campo Imperatore field appearance"><label class="moc-appearance-color" for="obs-color-campo"><span>Color</span><input type="color" id="obs-color-campo" value="#f4ba63" aria-label="Campo Imperatore field color"></label></div>
+          <div id="observatory-campo-list" class="observatory-list" role="group" aria-label="Campo Imperatore pointings"></div>
+          <div class="observatory-header"><label class="layer" for="field-asiago"><input id="field-asiago" type="checkbox"><span class="swatch teal"></span><span class="layer-copy"><b>Asiago</b><small>4 individual 1° × 1° fields · J2000</small></span></label><span id="obs-count-asiago" class="obs-count">0/4 visible</span><button id="asiago-only" class="obs-plan-all" type="button">Only AS</button><button id="asiago-plan" class="obs-plan-all" type="button">Add all to Plan (4)</button></div>
+          <div class="moc-appearance" data-obs-appearance="asiago" role="group" aria-label="Asiago field appearance"><label class="moc-appearance-color" for="obs-color-asiago"><span>Color</span><input type="color" id="obs-color-asiago" value="#63dfc7" aria-label="Asiago field color"></label></div>
+          <div id="observatory-asiago-list" class="observatory-list" role="group" aria-label="Asiago pointings"></div>
+        </section>
+        <section class="group">
+          <div class="group-title">Other footprints <span class="group-desc">FITS MOC NUNIQ</span></div>
+          <label class="layer muted" for="toggle-extra"><input id="toggle-extra" type="checkbox" disabled><span class="swatch mint"></span><span class="layer-copy"><b>Additional MOC</b><small id="extrahint">No FITS loaded</small></span></label>
+          <div class="moc-appearance" data-moc-appearance="extra" role="group" aria-label="extra MOC appearance">
+            <label class="moc-appearance-color" for="moc-color-extra"><span>Color</span><input type="color" id="moc-color-extra" aria-label="extra MOC color"></label>
+            <label class="moc-appearance-opacity" for="moc-opacity-extra"><span>Opacity</span><input type="range" id="moc-opacity-extra" min="0" max="100" step="1" aria-label="extra MOC opacity"><output id="moc-opacity-value-extra" for="moc-opacity-extra">—</output></label>
+          </div>
+          <button type="button" class="subtle-button" data-upload="extra">+ Import footprint FITS</button>
+        </section>
+        <section class="group" id="glade-panel">
+          <div class="group-title">GLADE+ galaxies · V90 <span class="group-desc">Default catalog</span></div><details class="small-help"><summary title="Help for GLADE catalog" aria-label="Help for GLADE catalog">?</summary><p>A preselected V90 VOTable is included by default, sorted by absolute B magnitude (BMAG), brightest first. Browse galaxies in groups of 100.</p></details>
+          <div id="glade-status" class="microcopy" role="status">Loading bundled GLADE V90 catalog…</div>
+          <div class="cv-inline glade-toolbar"><label class="cv-check"><input type="checkbox" id="glade-only-fov"> Selected FoV only</label><button id="glade-hide" type="button" disabled>Hide galaxies</button></div>
+          <label class="cv-check glade-all-toggle"><input type="checkbox" id="glade-show-all"> Show ALL galaxies in Aladin (100 rows per table page)</label>
+          <fieldset id="glade-distance-box" class="glade-distance-box" hidden aria-label="Galaxy distance selection">
+            <legend>Galaxy distance range · Mpc</legend>
+            <label class="cv-check"><input type="checkbox" id="glade-distance-enable"> Filter galaxies by distance</label>
+            <div class="glade-distance-inputs">
+              <label for="glade-distance-min">From (Mpc)<input type="number" id="glade-distance-min" min="0" step="any" inputmode="decimal" disabled></label>
+              <label for="glade-distance-max">To (Mpc)<input type="number" id="glade-distance-max" min="0" step="any" inputmode="decimal" disabled></label>
+            </div>
+            <p id="glade-distance-feedback" class="microcopy" role="status" aria-live="polite">Optional inclusive distance selection; no range filter by default.</p>
+            <p class="microcopy">With “Selected FoV only” enabled, show <strong>all</strong> galaxies within both the distance range and the selected FoV; no 100-marker limit. Search still filters the table only.</p>
+          </fieldset>
+          <div id="glade-plot-progress" class="microcopy" role="status" aria-live="polite">100 markers per page by default. Select Show all to load the entire catalog.</div>
+          <div class="glade-summary"><b id="glade-count">0 galaxies</b><span id="glade-page-count">—</span></div><div id="glade-order" class="microcopy" aria-live="polite">Absolute B magnitude (BMAG) · brightest first</div>
+          <input type="search" id="glade-search" placeholder="Search galaxy name or ID" aria-label="Search loaded GLADE galaxy" disabled>
+          <div class="glade-navigation"><button id="glade-prev" type="button" disabled>Previous 100</button><span id="glade-page">Page —</span><button id="glade-next" type="button" disabled>Next 100</button></div>
+          <div class="glade-table-wrap"><table><thead><tr><th>Galaxy</th><th>RA</th><th>Dec</th><th>Dist (Mpc)</th><th>M<sub>B</sub></th></tr></thead><tbody id="glade-rows"><tr><td colspan="5">Loading bundled V90 galaxy catalog…</td></tr></tbody></table></div>
+          <div id="glade-detail" class="glade-detail" aria-live="polite" hidden>Click a galaxy or its Aladin marker to inspect its full original catalog row in the sky viewer.</div>
+        </section>
+      </aside>
+      <div class="pane-resizer pane-resizer--left" id="resize-layers" role="separator" tabindex="0" aria-orientation="vertical" aria-label="Resize coverage sidebar" aria-valuemin="220" aria-valuemax="390" aria-valuenow="270" title="Drag to resize · arrow keys supported"></div>
+      <main class="workspace" id="sky-pane">
+        <div class="viewer-topbar">
+          <div class="viewer-title"><span class="viewer-live"></span><b>Aladin Lite</b><span class="viewer-pipe">/</span><span id="engineLabel">v3/latest · starting…</span></div>
+          <div class="view-actions"><button id="btn-fullsky" class="nav-button" type="button">All sky</button><button id="btn-gw" class="nav-button" type="button">Center GW</button></div>
+        </div>
+        <div class="viewer-stack" id="viewer-stack">
+          <div id="aladin-lite-div" aria-label="Aladin Lite: WebGL astronomy viewer"></div>
+          <div id="aladin-fail" class="error-screen" hidden role="alert">
+            <b>Aladin Lite (CDS v3/latest) did not load.</b>
+            <p>This page uses the real Aladin Lite engine. The official CDS script must be reachable. Open browser developer tools for network or WebAssembly errors. The MOC FITS files are included, but Aladin is required to render them.</p>
+            <button type="button" id="retry-aladin" class="nav-button">Retry loading</button>
+          </div>
+          <section id="glade-measurements" class="galaxy-measurement-dock" aria-label="Selected GLADE galaxy measurements" hidden>
+            <div class="galaxy-measurement-header"><span id="glade-measurements-title">Galaxy measurements</span><button type="button" id="glade-measurements-close" aria-label="Close galaxy measurements" title="Close measurements">×</button></div>
+            <div id="glade-measurements-scroll" class="galaxy-measurement-scroll" tabindex="0" aria-label="Scroll horizontally through all catalog parameters">
+              <table aria-label="Full original galaxy record"><thead><tr id="glade-measurements-labels"></tr></thead><tbody><tr id="glade-measurements-values"></tr></tbody></table>
+            </div>
+          </section>
+        </div>
+        
+
+<div class="settings-grid">
+          <div class="compact-card">
+            <div class="tiny-heading">BACKGROUND HiPS IMAGE</div>
+            <select id="hips-select" aria-label="Select HiPS">
+              <option value="P/Mellinger/color">Mellinger · all sky</option>
+              <option value="P/DSS2/color" selected>DSS2 Color · optical</option>
+              <option value="https://alaskybis.cds.unistra.fr/KiDS/CDS_P_KiDS_DR5_color-gri/">KiDS DR5 · RGB (CDS mirror)</option>
+            </select>
+            <div class="microcopy">Remote HiPS tiles and catalogs require a reachable server.</div>
+          </div>
+        </div>
+      </main>
+      <div class="pane-resizer pane-resizer--right" id="resize-coverage" role="separator" tabindex="0" aria-orientation="vertical" aria-label="Resize Coverage pane" aria-valuemin="340" aria-valuemax="850" aria-valuenow="520" title="Drag to resize Coverage · arrow keys supported"></div>
+      <aside id="coverage-pane" class="coverage-rail" aria-label="Interactive Coverage and tiling">
+        <div class="coverage-rail-top">
+          <span class="tiny-heading">RIGHT PANE · RESIZABLE</span>
+          <div class="coverage-rail-actions"><button type="button" id="expand-coverage" aria-pressed="false" title="Expand Coverage panel">Expand</button><button type="button" id="reset-layout" title="Reset panel widths">Reset</button></div>
+        </div>
+<section id="coverage-lab" class="coverage-lab" aria-label="GWsky-inspired Interactive Coverage">
+  <div class="coverage-header"><div><span class="tiny-heading">02 / INTERACTIVE COVERAGE LAB</span><h2>FoV tiling &amp; survey probability</h2></div><span class="coverage-badge" id="prob-mode" hidden>GEOMETRY ONLY</span></div>
+  <div class="coverage-info" id="prob-hint"><b>Quick start:</b> The attached BAYESTAR loads by default (offline). Set the field size, press <b>Preview</b>, then <b>Accept</b>. Move with the compass or <b>Best next</b>; refine with <b>Fine adjustment</b>. Click an accepted FoV to highlight and center it in Aladin. Use <b>Undo</b> or <b>Clear all</b> to revise the plan; create a MOC only when ready.</div>
+  <div class="coverage-toolbar" hidden><button id="cv-import-map" class="cv-primary" type="button" disabled>Load local BAYESTAR FITS</button><span id="cv-map-info">Loading bundled bayestar.multiorder.fits,1…</span></div>
+  <div class="cv-stats" aria-live="polite"><div><small>Accepted FoVs</small><strong id="cv-count">0</strong></div><div><small>GW90 area covered (approx.)</small><strong id="cv-area">0.00 deg²</strong></div><div><small>GW cumulative P</small><strong id="cv-pcum">—</strong></div><div><small>New FoV P</small><strong id="cv-pnew">—</strong></div></div>
+  <section id="cv-telescope" class="cv-card cv-telescope" aria-labelledby="cv-telescope-title">
+    <h3 id="cv-telescope-title">Telescope &amp; Field of View</h3>
+    <div class="cv-fields" role="group" aria-label="FoV shape, size and position angle">
+      <label>Shape<select id="cv-shape"><option value="rectangle">Rectangle</option><option value="circle">Circle</option><option value="ellipse">Ellipse</option></select></label>
+      <label>Width (°)<input id="cv-width" type="number" min="0.01" max="40" step="0.1" value="2"></label>
+      <label>Height (°)<input id="cv-height" type="number" min="0.01" max="40" step="0.1" value="1.5"></label>
+      <label>Circle radius (°)<input id="cv-radius" type="number" min="0.01" max="40" step="0.1" value="1"></label>
+      <label>PA (°)<input id="cv-pa" type="number" min="-360" max="360" step="1" value="0" aria-describedby="cv-pa-note"></label>
+    </div>
+    <small id="cv-pa-note" class="cv-tile-hint">Positive PA rotates from North toward West (current GRAWITA convention).</small>
+    <small class="cv-tile-hint">One FoV for manual pointing, the classic strategies and GW Tiling (rectangles only). New FoVs use it; accepted FoVs keep their own geometry.</small>
+  </section>
+  <section id="gw-tiling" class="cv-card gw-tiling" aria-labelledby="gw-tiling-title">
+    <div class="gw-tiling-head"><h3 id="gw-tiling-title">GW Tiling <small>· contiguous FoVs over the connected zones of the GW credible region</small></h3><span id="gw-engine" class="gw-engine" hidden>Web Worker · MOCWasm</span></div>
+    <details class="small-help"><summary aria-label="Help for GW Tiling" title="Show GW Tiling help">?</summary><p>The FoV (rectangles only), its size and position angle come from Telescope &amp; Field of View. Set one overlap: 0 % means that each new FoV touches an earlier one along an edge or at a vertex; above 0 % it is the share of the area of the FoV it is attached to. Choose the 10, 50 or 90 % credible region and its zones (connected parts of the region, North or South only when the whole zone lies on that side of the celestial equator), and optionally up to three MOCs of the left panel to intersect with. Generate coverage plans up to 20 contiguous FoVs in a Web Worker, targets in decreasing GW probability; Cancel stops it and leaves the plan unchanged. A branch is contiguous to an earlier FoV (the telescope moves back), a transfer moves to the next target. Probabilities are fractions of the whole BAYESTAR map, never renormalised; the official P(FoV), P(new) and P(cum) are those of the observation sequence.</p></details>
+    <div class="cv-fields" role="group" aria-label="GW Tiling overlap">
+      <label>Overlap (%)<select id="gw-overlap" autocomplete="off" aria-describedby="gw-overlap-hint"><option value="0" selected>0 % (edge or vertex contact)</option></select></label>
+    </div>
+    <small id="gw-overlap-hint" class="cv-tile-hint">FoV shape, size and PA: Telescope &amp; Field of View (rectangles only). Overlap 0 %: every new FoV touches an earlier FoV along an edge or at a vertex. Above 0 %: the area it shares with the FoV it is attached to is that percentage of that FoV's area (accepted up to 1 point more).</small>
+    <div class="cv-fields">
+      <label>GW credible region<select id="gw-level" autocomplete="off"><option value="0.1">10%</option><option value="0.5">50%</option><option value="0.9" selected>90%</option></select></label>
+      <label>Maximum FoVs (1–20)<input id="gw-max" type="number" min="1" max="20" step="1" value="10" autocomplete="off"></label>
+    </div>
+    <div class="gw-block-head"><span class="gw-block-title">Zones</span><button type="button" id="gw-zones-all">Select all zones</button></div>
+    <div id="gw-zones" class="gw-list" role="group" aria-label="Connected zones of the GW credible region"><p class="gw-note">Waiting for the BAYESTAR sky map…</p></div>
+    <div class="gw-block-head"><span class="gw-block-title">MOC intersection</span></div>
+    <div id="gw-mocs" class="gw-list gw-mocs" role="group" aria-label="MOCs to intersect with the selected zones"></div>
+    <div id="gw-targets" class="gw-targets" role="status" aria-live="polite"></div>
+    <div class="cv-actions"><button id="gw-generate" type="button" class="cv-primary">Generate coverage</button></div>
+    <p id="gw-shape-note" class="gw-note" aria-live="polite" hidden>GW Tiling plans rectangular FoVs only: choose Rectangle in Telescope &amp; Field of View. Circles and ellipses remain available for manual pointing and the classic strategies.</p>
+    <div id="gw-work-status" class="cv-work-status" role="status" aria-live="polite" aria-busy="false" hidden>
+      <span class="cv-spinner" aria-hidden="true"></span><span id="gw-work-text">Preparing GW Tiling</span>
+      <progress id="gw-work-progress" value="0" max="100" aria-label="GW Tiling progress"></progress>
+      <button type="button" id="gw-cancel" disabled>Cancel</button>
+    </div>
+    <div id="gw-feedback" class="cv-message" role="status" aria-live="polite">Contiguous coverage with the GW region planner: each new FoV touches or overlaps an earlier one; the classic strategies are available under Advanced tiling strategies.</div>
+    <div id="gw-result" class="cv-cr-summary" role="region" aria-label="GW Tiling result" hidden></div>
+  </section>
+  <div class="cv-cols">
+    <div class="cv-card">
+      <h3>Manual pointing</h3>
+      <div class="cv-fields"><label>Center RA (°)<input id="cv-ra" type="number" min="0" max="359.99999" step="any" value="6"></label>
+        <label>Center Dec (°)<input id="cv-dec" type="number" min="-90" max="90" step="any" value="41"></label>
+        <label>Overlap X (%)<input id="cv-overlap-x" type="number" min="0" max="90" step="5" value="15"></label>
+        <label>Overlap Y (%)<input id="cv-overlap-y" type="number" min="0" max="90" step="5" value="15"></label>
+
+        <label>Area sample order<select id="cv-order" autocomplete="off"><option value="8">8 (fast)</option><option value="9" selected>9 (finer)</option></select></label>
+        <label>P(inside) HEALPix order<select id="cv-prob-order" autocomplete="off"><option value="10">10 (fast)</option><option value="11">11</option><option value="12" selected>12 (default)</option><option value="13">13</option><option value="14">14 (high accuracy)</option></select></label>
+        <small id="cv-orders-lock" class="cv-orders-lock" hidden>HEALPix settings locked for this session. Reload to change.</small>
+      </div>
+      <div class="cv-overlap-readout" id="cv-overlap-readout">Calculated X/Y stepping will appear here.</div>
+      <div class="cv-inline"><button id="cv-use-center" type="button">Use Aladin center</button><button id="cv-goto" type="button">Go to RA/Dec</button></div>
+      <div class="cv-actions"><button id="cv-preview" type="button" class="cv-primary">Preview FoV</button><button id="cv-accept" type="button" disabled>✓ Accept FoV</button><button id="cv-best" type="button">★ Best next (8 directions)</button></div>
+      <div class="cv-compass" aria-label="FoV moves in eight directions"><button data-cv-dir="NW">NW</button><button data-cv-dir="N">N</button><button data-cv-dir="NE">NE</button><button data-cv-dir="W">W</button><button type="button" id="cv-center-compass" title="Copy the actual Aladin view center into the FoV preview">Center</button><button data-cv-dir="E">E</button><button data-cv-dir="SW">SW</button><button data-cv-dir="S">S</button><button data-cv-dir="SE">SE</button></div>
+      <div class="cv-fine-adjust" role="group" aria-label="Fine adjustment before accepting a field">
+        <div class="cv-fine-head"><strong>Fine adjustment</strong><label>Step (arcmin) <input id="cv-fine" type="number" min="0.1" max="30" step="0.5" value="1" aria-label="Fine adjustment in arcminutes"></label></div>
+        <div class="cv-fine-nav" aria-label="Small ICRS tangent-plane moves">
+          <button type="button" data-fine-dir="NW" title="Nudge northwest">↖</button><button type="button" data-fine-dir="N" title="Nudge north">↑</button><button type="button" data-fine-dir="NE" title="Nudge northeast">↗</button>
+          <button type="button" data-fine-dir="W" title="Nudge west">←</button><button type="button" id="cv-fine-reset" title="Restore the center before fine nudging">Reset</button><button type="button" data-fine-dir="E" title="Nudge east">→</button>
+          <button type="button" data-fine-dir="SW" title="Nudge southwest">↙</button><button type="button" data-fine-dir="S" title="Nudge south">↓</button><button type="button" data-fine-dir="SE" title="Nudge southeast">↘</button>
+        </div><small>Moves the preview only; accepted fields remain unchanged. Overlap applies to the larger compass above.</small>
+      </div>
+      <div class="cv-message" role="status" aria-live="polite" id="cv-feedback">Set a FoV and press Preview. Aladin Lite renders the geometry.</div>
+      <div id="cv-work-status" class="cv-work-status" role="status" aria-live="polite" aria-busy="false" hidden>
+        <span class="cv-spinner" aria-hidden="true"></span><span id="cv-work-text">Preparing calculation</span>
+        <progress id="cv-work-progress" value="0" max="100" aria-label="Probability calculation progress"></progress>
+        <button type="button" id="cv-cancel">Interrompi</button>
+      </div>
+    </div>
+    <div class="cv-card">
+      <h3>Survey overlap and GW probability</h3>
+      <p class="cv-secondary">GW probabilities are computed only after loading a complete probability map. Geometric intersections in deg² are available immediately.</p>
+      <div class="cv-survey"><div class="cv-survey-head"><span>Survey</span><span>Area in GW90 ∩ survey</span><span>GW probability in whole survey</span><span>GW probability in GW90 ∩ survey</span></div>
+        <div><span>KiDS-N</span><output id="cv-kidsN-area">—</output><output id="cv-kidsN-prob">—</output><output id="cv-kidsN-prob-gw90">—</output></div>
+        <div><span>KiDS-S</span><output id="cv-kidsS-area">—</output><output id="cv-kidsS-prob">—</output><output id="cv-kidsS-prob-gw90">—</output></div>
+        <div><span>KiDS-W2</span><output id="cv-kidsW2-area">—</output><output id="cv-kidsW2-prob">—</output><output id="cv-kidsW2-prob-gw90">—</output></div>
+        <div><span>ATLAS-N</span><output id="cv-atlasN-area">Import FITS</output><output id="cv-atlasN-prob">—</output><output id="cv-atlasN-prob-gw90">—</output></div>
+        <div><span>ATLAS-S</span><output id="cv-atlasS-area">Import FITS</output><output id="cv-atlasS-prob">—</output><output id="cv-atlasS-prob-gw90">—</output></div>
+        <div><span>ICRS North hemisphere†</span><output>—</output><output id="cv-hemiN-prob">—</output><output>—</output></div>
+        <div><span>ICRS South hemisphere†</span><output>—</output><output id="cv-hemiS-prob">—</output><output>—</output></div>
+      </div>
+      <p class="cv-secondary">†North/South totals use HEALPix cell centers at Dec = 0°.</p>
+      <details id="cv-classic-tiling" class="cv-classic-tiling"><summary>Advanced tiling strategies</summary>
+      <div class="cv-section-title">Probability-guided automatic tiling</div>
+      <div class="cv-fields"><label class="cv-tile-strategy">Tiling strategy<select id="cv-tile-mode" aria-describedby="cv-tile-hint"><option value="adjacent" selected>Adjacent — contiguous FoVs (uses overlap)</option><option value="peaks">Peaks — GW probability peaks (may jump)</option><option value="credible">Cover BAYESTAR credible region (10% / 50% / 90%)</option></select></label>
+        <label id="cv-region-field">Region / priority<select id="cv-region"><option value="all">All sky</option><option value="north">Northern hemisphere (Dec ≥ 0)</option><option value="south">Southern hemisphere (Dec &lt; 0)</option><option value="atlasN">ATLAS-N (requires MOC)</option><option value="atlasS">ATLAS-S (requires MOC)</option><option value="kidsN">KiDS-N</option><option value="kidsS">KiDS-S</option><option value="kidsW2">KiDS-W2</option><option value="ipn">IPN (requires MOC)</option><option value="grb">GRB (requires MOC)</option></select></label>
+        <label id="cv-tile-count-field">FoV count (max 8)<input id="cv-tile-count" type="number" min="1" max="8" step="1" value="3"></label>
+        <label id="cv-cr-level-field" hidden>Credible region<select id="cv-cr-level" autocomplete="off"><option value="0.1">10%</option><option value="0.5">50%</option><option value="0.9" selected>90%</option></select></label>
+        <label id="cv-cr-max-field" hidden>Max new FoVs (1–20)<input id="cv-cr-max" type="number" min="1" max="20" step="1" value="20" autocomplete="off"></label>
+        <label id="cv-cr-mode-field" hidden>Coverage mode<select id="cv-cr-mode" autocomplete="off"><option value="probability" selected>Probability first</option><option value="observational">Observational — contiguous FoVs</option></select></label>
+        <label id="cv-obs-behavior-field" hidden>Observational behavior<select id="cv-obs-behavior" autocomplete="off"><option value="strict" selected>Strict contiguous</option><option value="balanced">Balanced — probability and continuity</option></select></label>
+        <label id="cv-obs-overlap-field" hidden>Area overlap between consecutive FoVs<select id="cv-obs-overlap" autocomplete="off"><option value="0">0% (contact)</option><option value="5">5%</option><option value="10" selected>10%</option><option value="15">15%</option><option value="20">20%</option><option value="25">25%</option><option value="30">30%</option><option value="35">35%</option><option value="40">40%</option><option value="45">45%</option><option value="50">50%</option></select></label></div>
+      <details id="cv-obs-advanced" class="cv-obs-advanced" hidden><summary>Advanced settings</summary>
+        <div class="cv-fields"><label id="cv-obs-alpha-field">α, Balanced only (0–1)<input id="cv-obs-alpha" type="number" min="0" max="1" step="0.05" value="0.5" autocomplete="off"></label></div>
+        <label class="cv-check"><input type="checkbox" id="cv-obs-from-last" autocomplete="off"> Start contiguous to the last accepted FoV</label>
+      </details>
+      <small id="cv-tile-hint" class="cv-tile-hint">Adjacent: each new FoV is one overlap step N, E, S or W of the previous one, the neighbour with the highest additional probability. 1–8 FoVs.</small>
+      <button id="cv-autotile" type="button" class="cv-primary" disabled>Generate greedy tiling (uses overlap)</button>
+      <div id="cv-cr-summary" class="cv-cr-summary" role="status" aria-live="polite" hidden></div>
+      </details>
+      <div class="cv-inline"><label class="cv-check"><input type="checkbox" id="cv-show-accepted" checked> Show accepted FoVs</label><label class="cv-check"><input type="checkbox" id="cv-show-path" checked> Show observational path</label></div>
+      <div id="cv-path-legend" class="cv-path-legend" hidden></div>
+    </div>
+  </div>
+  <div class="cv-card cv-sequence"><div class="cv-sequence-head"><h3>Observation sequence <small>· Click a row to locate and highlight its FoV in Aladin</small></h3><div class="cv-inline"><button id="cv-undo" type="button">↶ Undo last</button><button id="cv-delete-selected" type="button" disabled title="Delete the FoV selected in the table; P(new) and P(cum) of the following FoVs are recalculated">Delete selected</button><button id="cv-clear" type="button">Clear all FoVs</button><button id="cv-export-csv" type="button">Export CSV</button><button id="cv-export-json" type="button">Export JSON</button></div></div>
+    <div class="cv-table-wrap"><table class="cv-table"><thead><tr><th>#</th><th>Center RA / Dec (°)</th><th>Shape</th><th>P(FoV)</th><th>P(new)</th><th>P(cum)</th><th>New area in GW90</th><th>Order</th></tr></thead><tbody id="cv-rows"><tr><td colspan="8">No accepted FoVs.</td></tr></tbody></table></div>
+    <div class="cv-inline cv-moc-buttons"><button id="cv-create-moc" type="button" class="cv-primary">Create MOC from accepted FoVs</button><button id="cv-moc-export" type="button" disabled>Export MOC JSON</button><button id="cv-moc-fits" type="button" disabled>Export MOC FITS</button><span id="cv-moc-result">No MOC created (geometric FoVs).</span></div>
+    <div class="moc-appearance moc-appearance-generated" role="group" aria-label="Accepted coverage MOC appearance">
+      <label class="moc-appearance-color" for="cv-moc-color"><span>MOC color</span><input type="color" id="cv-moc-color" value="#3cf2b3" aria-label="Accepted coverage MOC color" disabled></label>
+      <label class="moc-appearance-opacity" for="cv-moc-opacity"><span>Opacity</span><input type="range" id="cv-moc-opacity" min="0" max="100" value="25" step="1" aria-label="Accepted coverage MOC opacity" disabled><output id="cv-moc-opacity-value" for="cv-moc-opacity">25%</output></label>
+    </div><div class="cv-secondary">Plan fields remain geometric outlines until you press <b>Create MOC</b>.</div>
+  </div>
+
+<section id="transient-inspector" class="cv-card transient-inspector" aria-label="Transient and MOC membership inspector">
+  <div class="transient-header"><div><span class="tiny-heading">03 / TRANSIENT CROSSMATCH</span><h2>Object membership &amp; 3D distance</h2></div></div>
+  <details class="small-help"><summary title="Help">?</summary><p>Paste ID, RA, Dec in ICRS decimal degrees. Select an object to test a 2D MOC and compare all-sky and directional GW distance PDFs. The complete 3D BAYESTAR FITS is required for distance plots.</p></details>
+  <div class="tr-quick-add" role="group" aria-label="Single transient position and luminosity distance">
+    <label>Transient ID<input type="text" id="tr-quick-id" placeholder="e.g. AT2026abc" value="Transient_A"></label>
+    <label>RA (°)<input type="number" id="tr-quick-ra" min="0" max="359.999999" step="any" value="6.886"></label>
+    <label>Dec (°)<input type="number" id="tr-quick-dec" min="-90" max="90" step="any" value="45.598"></label>
+    <label>Distance (Mpc)<input type="number" id="tr-quick-distance" min="0.000001" step="any" value="173"></label>
+    <button type="button" id="tr-quick-analyze" class="cv-primary">Add &amp; analyze transient</button>
+  </div>
+  <p class="cv-secondary">Single-transient distance is optional for CSV imports; use this field to display its vertical line and probability-density intersection. New quick-add entries append to existing objects.</p>
+  <label class="tr-paste-label" for="tr-paste">Paste transients — <b>ID, RA (deg), Dec (deg), Distance_Mpc (optional)</b> · one line per object</label>
+  <textarea id="tr-paste" rows="4" spellcheck="false" placeholder="ID, RA, Dec, Distance_Mpc&#10;Object_A, 6.886, 45.598, 173&#10;Object_B, 8.112, 45.597, 180"></textarea>
+  <div class="transient-tools">
+    <button id="tr-paste-run" type="button" class="cv-primary">Analyze positions</button>
+    <button id="tr-import" type="button">Import transient CSV</button>
+    <label>Test against MOC<select id="tr-moc"><option value="gw90">GW 90%</option><option value="gw50">GW 50%</option><option value="gw10">GW 10%</option><option value="kidsN">KiDS-N</option><option value="kidsS">KiDS-S</option><option value="kidsW2">KiDS-W2</option><option value="atlasN">ATLAS-N</option><option value="atlasS">ATLAS-S</option><option value="extra">Additional MOC</option><option value="ipn">IPN</option><option value="grb">GRB</option><option value="coverage">Accepted-coverage MOC</option></select></label>
+  </div>
+  <p id="tr-info" class="cv-secondary" role="status">Paste coordinates in decimal degrees or import a CSV with ID, RA, Dec.</p>
+  <div class="tr-summary"><strong id="tr-count">0 objects</strong><span id="tr-in">— inside</span><button id="tr-export" type="button" disabled>Export results CSV</button></div>
+  <div class="cv-table-wrap tr-scroll"><table class="cv-table"><thead><tr><th>Object</th><th>RA (°)</th><th>Dec (°)</th><th>Distance</th><th>In MOC?</th></tr></thead><tbody id="tr-rows"><tr><td colspan="5">Paste or import your transient positions.</td></tr></tbody></table></div>
+  <div id="tr-detail" class="tr-detail" aria-live="polite">Select an object to compare 2D localization and GW distance distributions.</div>
+  <section class="tr-fov-query" aria-label="Selected FoV solar system objects">
+    <div class="tr-fov-head"><h3>Selected FoV · SkyBoT</h3><span id="tr-fov-name">Select an accepted FoV</span></div>
+    <div class="tr-fov-actions"><label>Observation epoch (UTC)<input id="tr-epoch" type="datetime-local" step="60"></label><label>Observer code<input id="tr-observer" type="text" value="500" maxlength="8" title="MPC code; 500 = geocenter"></label></div>
+    <div class="cv-inline"><button id="tr-skybot" type="button" class="cv-primary" disabled>Query SkyBoT · selected FoV</button><button id="tr-bright" type="button" disabled>Bright stars · selected FoV</button><button id="tr-bot-clear" type="button" disabled>Clear SkyBoT result</button></div>
+    <p id="tr-bot-status" role="status" class="cv-secondary">SkyBoT follows the accepted FoV selected in Coverage.</p>
+    <div class="cv-table-wrap tr-bot-scroll"><table class="cv-table"><thead><tr><th>Object</th><th>RA (°)</th><th>Dec (°)</th><th>V mag</th></tr></thead><tbody id="tr-bot-rows"></tbody></table></div>
+  </section>
+  <input id="tr-file" type="file" accept=".csv,.tsv,.txt" hidden>
+</section>
+
+  <!-- No accept filter: GraceDB versioned names such as bayestar.multiorder.fits,1 and .fits.gz,1 must be selectable. The FITS bytes are validated on import. -->
+  <input id="cv-map-file" type="file" hidden>
+</section>
+      </aside>
+    </div>
+    <section id="gw-superevent" class="gw-superevent" aria-labelledby="gw-superevent-title">
+      <h2 id="gw-superevent-title">GW Superevent</h2>
+      <div id="gw-superevent-body" class="gw-superevent-body"><p class="gws-note">Waiting for the BAYESTAR sky map…</p></div>
+    </section>
+    <div class="status app-status-bar" id="status" role="status" aria-live="polite"><span class="status-dot"></span><span id="statusText">Aladin initialization…</span></div>
+  </div>
+  <footer class="footer">
+    <p><b>GRAWITA Dryrun</b> — An experimental application developed for simulated GRAWITA multi-messenger follow-up exercises.</p>
+    <p>Developed and maintained by <b>Giuseppe Greco</b>, G. Stratta, P. D'Avanzo, A. Rossi, A. Melandri and the GRAWITA Collaboration.</p>
+  </footer>
+  <input id="fits-file" type="file" accept=".fits,.fit,.moc" hidden>
+  
+  <!-- Official CDS Aladin Lite v3/latest, requested by the user. No alternate sky renderer. -->
+  <script src="https://aladin.cds.unistra.fr/AladinLite/api/v3/latest/aladin.js" charset="utf-8"></script>
+  <script src="scripts/safe-file-reader.js"></script>
+  <script src="scripts/moc-data.js"></script>
+  <script src="scripts/atlas-moc-data.js"></script>
+  <script src="scripts/coverage-math.js"></script>
+  <script src="scripts/event-bayestar-data.js"></script>
+  <script src="scripts/event-alert-data.js"></script>
+  <script src="scripts/coverage-worker-bundle.js"></script>
+  <script src="scripts/coverage-worker-client.js"></script>
+  <script src="scripts/credible-region-tiling.js"></script>
+  <script src="scripts/observational-contiguous-tiling.js"></script>
+  <script src="scripts/moc-wasm-bundle.js"></script>
+  <script src="scripts/gw-tiling-worker-bundle.js"></script>
+  <script src="scripts/gw-tiling-client.js"></script>
+  <script src="scripts/moc-canonical.js"></script>
+  <script src="scripts/moc-fits-export.js"></script>
+  <script src="scripts/sky-field-selection.js"></script>
+  <script src="scripts/coverage-panel.js"></script>
+  <script src="scripts/gw-tiling-panel.js"></script>
+  <script src="scripts/superevent-summary.js"></script>
+  <script src="scripts/app.js"></script>
+  <script src="scripts/transient-inspector.js"></script>
+  <script src="scripts/glade-default-data.js"></script>
+  <script src="scripts/glade-measurements-data.js"></script>
+  <script src="scripts/glade-v90.js"></script>
+  <script src="scripts/observatory-fields.js"></script>
+  <script src="scripts/layout-resize.js"></script>
+  <script src="scripts/nav-active.js"></script>
+  <script src="scripts/button-feedback.js"></script>
+</body>
+</html>
